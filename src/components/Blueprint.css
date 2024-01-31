@@ -1,0 +1,24 @@
+.blueprint {
+  margin: 0;
+  border: 2px solid #336dbe;
+  border-radius: 15px;
+  padding: 15px 30px 25px;
+}
+
+.blueprint h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.blueprint h3 {
+  font-size: 1.4rem;
+  font-weight: 200;
+}
+
+.none-name {
+  color: #75564a;
+}
+
+.none {
+  color: #5e5e5e;
+}

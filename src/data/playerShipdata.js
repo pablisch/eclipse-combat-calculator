@@ -1,8 +1,10 @@
-export const playerShipData = [
+const baseData = [
   {
-    player: 'ancients',
-    ships: {
-      ancientShip: {
+    player: 'Ancients',
+    ships: [
+      {
+        name: 'Ancient Ship',
+        quantity: 1,
         initiative: 2,
         hulls: 2,
         computers: 1,
@@ -11,17 +13,20 @@ export const playerShipData = [
         cannons: {
           ion: 2,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 0,
-        consumption: 0
+        consumption: 0,
       },
-    },
+    ],
   },
   {
-    player: 'galacticCentre',
-    ships: {
-      gcds: {
+    // player: 'Galactic Centre Defence System',
+    player: 'GCDS',
+    ships: [
+      {
+        name: 'GCDS',
+        quantity: 1,
         initiative: 0,
         hulls: 8,
         computers: 1,
@@ -30,17 +35,19 @@ export const playerShipData = [
         cannons: {
           ion: 4,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 0,
-        consumption: 0
+        consumption: 0,
       },
-    },
+    ],
   },
   {
-    player: 'terran',
-    ships: {
-      interceptor: {
+    player: 'Eridani',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 1,
         initiative: 3,
         hulls: 1,
         computers: 0,
@@ -49,12 +56,14 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 3,
-        consumption: 2
+        consumption: 2,
       },
-      cruiser: {
+      {
+        name: 'Cruiser',
+        quantity: 0,
         initiative: 2,
         hulls: 2,
         computers: 1,
@@ -63,12 +72,14 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 3,
-        consumption: 2
+        consumption: 2,
       },
-      dreadnought: {
+      {
+        name: 'Dreadnought',
+        quantity: 0,
         initiative: 1,
         hulls: 3,
         computers: 1,
@@ -77,73 +88,14 @@ export const playerShipData = [
         cannons: {
           ion: 2,
           plasma: 0,
-          antimatter: 0
-        },
-        power: 3,
-        consumption: 3
-      },
-      starbase: {
-        initiative: 4,
-        hulls: 3,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 3,
-        consumption: 1
-      },
-    },
-  },
-  {
-    player: 'eridani',
-    ships: {
-      interceptor: {
-        initiative: 3,
-        hulls: 1,
-        computers: 0,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 3,
-        consumption: 2
-      },
-      cruiser: {
-        initiative: 2,
-        hulls: 2,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 3,
-        consumption: 2
-      },
-      dreadnought: {
-        initiative: 1,
-        hulls: 3,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 2,
-          plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 4,
-        consumption: 3
+        consumption: 3,
       },
-      starbase: {
+      {
+        name: 'Starbase',
+        quantity: 0,
         initiative: 4,
         hulls: 3,
         computers: 1,
@@ -152,79 +104,20 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 3,
-        consumption: 1
+        consumption: 1,
       },
-    },
+    ],
   },
   {
-    player: 'planta',
-    ships: {
-      interceptor: {
-        initiative: 1,
-        hulls: 1,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 5,
-        consumption: 2
-      },
-      cruiser: {
-        initiative: 1,
-        hulls: 2,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 5,
-        consumption: 2
-      },
-      dreadnought: {
-        initiative: 1,
-        hulls: 3,
-        computers: 1,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 2,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 5,
-        consumption: 3
-      },
-      starbase: {
-        initiative: 2,
-        hulls: 3,
-        computers: 2,
-        shields: 0,
-        missiles: 0,
-        cannons: {
-          ion: 1,
-          plasma: 0,
-          antimatter: 0
-        },
-        power: 5,
-        consumption: 1
-      },
-    },
-  },
-  {
-    player: 'orion',
-    ships: {
-      interceptor: {
+    player: 'Orion',
+    ships: [
+      {
+        name: 'Interceptor',
         initiative: 4,
+        quantity: 0,
         hulls: 1,
         computers: 1,
         shields: 1,
@@ -232,12 +125,14 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 4,
-        consumption: 2
+        consumption: 2,
       },
-      cruiser: {
+      {
+        name: 'Cruiser',
+        quantity: 1,
         initiative: 3,
         hulls: 2,
         computers: 1,
@@ -246,12 +141,14 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 5,
-        consumption: 2
+        consumption: 2,
       },
-      dreadnought: {
+      {
+        name: 'Dreadnought',
+        quantity: 0,
         initiative: 2,
         hulls: 3,
         computers: 1,
@@ -260,12 +157,14 @@ export const playerShipData = [
         cannons: {
           ion: 2,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 6,
-        consumption: 3
+        consumption: 3,
       },
-      starbase: {
+      {
+        name: 'Starbase',
+        quantity: 0,
         initiative: 5,
         hulls: 3,
         computers: 1,
@@ -274,11 +173,162 @@ export const playerShipData = [
         cannons: {
           ion: 1,
           plasma: 0,
-          antimatter: 0
+          antimatter: 0,
         },
         power: 3,
-        consumption: 1
+        consumption: 1,
       },
-    },
+    ],
   },
-]
+  {
+    player: 'Planta',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 1,
+        initiative: 1,
+        hulls: 1,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 0,
+        initiative: 1,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 1,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 2,
+        hulls: 3,
+        computers: 2,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 1,
+      },
+    ],
+  },
+  {
+    player: 'Draco',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 1,
+        initiative: 3,
+        hulls: 1,
+        computers: 0,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 0,
+        initiative: 2,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 1,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 4,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 1,
+      },
+    ],
+  },
+];
+
+export const playerShipData = [
+  ...baseData,
+  { ...baseData[2], player: 'Hydran' },
+  { ...baseData[2], player: 'Mechanema' },
+  { ...baseData[2], player: 'Terran' },
+  { ...baseData[2], player: 'Terran Alliance' },
+  { ...baseData[2], player: 'Terran Directorate' },
+  { ...baseData[2], player: 'Terran federation' },
+  { ...baseData[2], player: 'Terran Republic' },
+  { ...baseData[2], player: 'Terran Union' },
+
+];
