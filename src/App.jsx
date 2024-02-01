@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import { playerShipData } from './data/playerShipData';
 import PlayerSelectionBox from './components/PlayerSelectionBox';
@@ -17,18 +17,29 @@ import {
 
 function App() {
   const [allData, setAllData] = useState(playerShipData);
+  const [battleInProgress, setBattleInProgress] = useState(false);
+  const [battleCount, setBattleCount] = useState(false);
 
   const [attackerIndex, setAttackerIndex] = useState(3);
   const [defenderIndex, setDefenderIndex] = useState(0);
 
-  
+  useEffect(() => {
+    console.log('battle in progress?', battleInProgress);
+    if (battleCount > 0) startBattle();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [battleCount])
+
   let armies = [];
-  let attacks = 0;
+  // let attacks = 0;
   let allRolls = [];
-  let runs = 100000;
+  let runs = 500000;
 
   const handleBattle = () => {
+    setBattleInProgress(true);
+    setBattleCount(count => count + 1);
+  };
 
+  const startBattle = () => {
     // console.log('Fight!')
     const attacker = allData[attackerIndex].ships;
     const defender = allData[defenderIndex].ships;
@@ -46,7 +57,7 @@ function App() {
     for (let i = 0; i < runs; i++) {
       armies = cloneDeep(startingArmies);
       // console.log('armies: ', armies[0], armies[1]);
-      attacks = 0;
+      // attacks = 0;
       while (enemiesRemaining(armies)) {
         const shooter = getNextAttacker(armies);
         const shots = fireCannons(shooter);
@@ -54,7 +65,7 @@ function App() {
         const targets = orderTargetsByPriority(armies, shooter.getRole());
         // console.log(enemiesRemaining(armies));
         assignDamage(targets, shooter, shots, armies, allRolls);
-        attacks++;
+        // attacks++;
         if (!enemiesRemaining(armies)) {
           const winner = armies[0].role;
           // console.log(`${winner} won after ${attacks} attacks! ${allRolls}`);
@@ -67,39 +78,14 @@ function App() {
       }
       
       armies = [];
-      attacks = 0;
+      // attacks = 0;
       allRolls = [];
     }
-    console.log('attacker:', Math.round(battles.attacker / 1000), 'defender:', Math.round(battles.defender / 1000), 'over', runs, 'battles.');
+    console.log('attacker:', Math.round(battles.attacker / (runs / 100)), 'defender:', Math.round(battles.defender / (runs / 100)), 'over', runs, 'battles.');
+    console.log(battleInProgress)
+    setBattleInProgress(false);
     // console.log('startingArmies: ', startingArmies);
   };
-
-  // function deepClone(obj) {
-  //   if (obj === null || typeof obj !== 'object') {
-  //     return obj;
-  //   }
-  
-  //   if (obj instanceof Ship) {
-  //     // Create a new Ship instance with the same properties
-  //     const { id, role, name, initiative, hulls, computers, shields, ionCannons, plasmaCannons, antimatterCannons, missiles, missileRounds, rounds, missileThreat, cannonThreat, priority } = obj;
-  //     return new Ship(role, name, initiative, hulls, computers, shields, ionCannons, plasmaCannons, antimatterCannons, missiles);
-  //   }
-  
-  //   if (Array.isArray(obj)) {
-  //     // Create a new array with deep-cloned elements
-  //     return obj.map(deepClone);
-  //   }
-  
-  //   // Create a new object with deep-cloned properties
-  //   const newObj = {};
-  //   for (const key in obj) {
-  //     newObj[key] = deepClone(obj[key]);
-  //   }
-  
-  //   return newObj;
-  // }
-  
-  
 
   return (
     <div id='App'>
@@ -119,6 +105,7 @@ function App() {
           setAttackerIndex={setAttackerIndex}
           setDefenderIndex={setDefenderIndex}
           handleBattle={handleBattle}
+          battleInProgress={battleInProgress}
         />
       </div>
       <div id='defender'>
@@ -128,6 +115,7 @@ function App() {
           playIndex={defenderIndex}>
           Defender
         </CombatantBox>
+        {console.log('rendering app')}
       </div>
     </div>
   );

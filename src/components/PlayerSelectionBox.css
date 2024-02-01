@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   border: 3px solid #336dbe;
+  border: 2px solid #7da8e3;
   border-radius: 15px;
   padding: 25px 30px;
   width: var(--box-width);
@@ -10,4 +11,39 @@
 
 .combatant-select-box label {
   margin: 10px;
+}
+
+.combatant-select-box select {
+  font-family: 'Raleway', sans-serif;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.player-selection-box button {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.3rem;
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 2px solid #336dbe;
+  background-color: #a5c4ef;
+}
+
+.player-selection-box button:hover {
+  border: 2px solid #f3b538;
+  background-color: #be3333;
+  color: #ffe943;
+  cursor: pointer;
+}
+
+.calculating {
+  border: 2px solid #38f35a;
+  background-color: #be33ab;
+  color: #353324;
+}
+
+button:disabled {
+  border: 2px solid #e8e0d1;
+  background-color: #9e9292;
+  color: #302f25;
+  cursor: pointer;
 }
