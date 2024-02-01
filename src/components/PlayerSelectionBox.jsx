@@ -9,6 +9,7 @@ const PlayerSelectionBox = ({
   setDefenderIndex,
   handleBattle,
   battleInProgress,
+  report,
 }) => {
   
   const handleSelectAttacker = (e) => {
@@ -40,8 +41,13 @@ const PlayerSelectionBox = ({
           ))}
         </select>
       </div>
+      <div className="button-and-report">
 
-      <button onClick={handleBattle} disabled={battleInProgress} className={battleInProgress ? 'calculating' : ''}>{battleInProgress ? 'Calulating' : 'Commence battle'}</button>
+        <button onClick={handleBattle} disabled={battleInProgress} className={battleInProgress ? 'calculating' : ''}>{battleInProgress ? 'Calculating...' : 'Commence battle'}</button>
+        {report.length === 1 ? <p id='report'>{report[0]}</p> : <p id='report'>
+          <span>{ report[0]}</span>{report[1] } <span>{report[2] }</span>{report[3] } <span>{ report[4]}</span>
+        </p>}
+      </div>
 
       <div id='defender-selector-box' className='combatant-select-box'>
         <label htmlFor='selectDefender'>Defender:</label>
@@ -56,7 +62,6 @@ const PlayerSelectionBox = ({
           ))}
         </select>
       </div>
-      {console.log('rendering player selection box', battleInProgress)}
     </div>
   );
 };
@@ -68,6 +73,7 @@ PlayerSelectionBox.propTypes = {
   setDefenderIndex: PropTypes.func.isRequired,
   handleBattle: PropTypes.func.isRequired,
   battleInProgress: PropTypes.bool.isRequired,
+  report: PropTypes.array.isRequired,
 };
 
 export default PlayerSelectionBox;

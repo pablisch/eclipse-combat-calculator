@@ -5,7 +5,7 @@
   border: 3px solid #336dbe;
   border: 2px solid #7da8e3;
   border-radius: 15px;
-  padding: 25px 30px;
+  padding: 20px 30px;
   width: var(--box-width);
 }
 
@@ -26,12 +26,13 @@
   border-radius: 10px;
   border: 2px solid #336dbe;
   background-color: #a5c4ef;
+  width: 220px;
 }
 
 .player-selection-box button:hover {
-  border: 2px solid #f3b538;
-  background-color: #be3333;
-  color: #ffe943;
+  border: 2px solid #a5c4ef;
+  background-color: #235497;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -41,9 +42,28 @@
   color: #353324;
 }
 
-button:disabled {
-  border: 2px solid #e8e0d1;
+.player-selection-box button:disabled {
+  border: 2px solid #e8e0d1 !important;
   background-color: #9e9292;
   color: #302f25;
-  cursor: pointer;
+  cursor: not-allowed;
+}
+
+.button-and-report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#report {
+  margin-top: 15px;
+  font-size: 1.1rem; 
+  font-weight: 200;
+  color: #fff;
+}
+
+#report span {
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #85c8ff;
 }

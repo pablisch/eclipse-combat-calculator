@@ -19,20 +19,24 @@ function App() {
   const [allData, setAllData] = useState(playerShipData);
   const [battleInProgress, setBattleInProgress] = useState(false);
   const [battleCount, setBattleCount] = useState(false);
+  const [report, setReport] = useState(['Choose your battle!']);
 
   const [attackerIndex, setAttackerIndex] = useState(3);
   const [defenderIndex, setDefenderIndex] = useState(0);
 
   useEffect(() => {
-    console.log('battle in progress?', battleInProgress);
-    if (battleCount > 0) startBattle();
+    if (battleCount > 0) {
+      setTimeout(() => {
+        startBattle();
+      }, 100);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [battleCount])
 
   let armies = [];
   // let attacks = 0;
   let allRolls = [];
-  let runs = 500000;
+  let runs = 100000;
 
   const handleBattle = () => {
     setBattleInProgress(true);
@@ -82,9 +86,8 @@ function App() {
       allRolls = [];
     }
     console.log('attacker:', Math.round(battles.attacker / (runs / 100)), 'defender:', Math.round(battles.defender / (runs / 100)), 'over', runs, 'battles.');
-    console.log(battleInProgress)
     setBattleInProgress(false);
-    // console.log('startingArmies: ', startingArmies);
+    setReport([`${allData[attackerIndex].player}`, ' has a', `${Math.round(battles.attacker / (runs / 100))}%`, ' chance of defeating the', `${allData[defenderIndex].player}`]);
   };
 
   return (
@@ -106,6 +109,7 @@ function App() {
           setDefenderIndex={setDefenderIndex}
           handleBattle={handleBattle}
           battleInProgress={battleInProgress}
+          report={report}
         />
       </div>
       <div id='defender'>
@@ -115,7 +119,6 @@ function App() {
           playIndex={defenderIndex}>
           Defender
         </CombatantBox>
-        {console.log('rendering app')}
       </div>
     </div>
   );
