@@ -1,5 +1,6 @@
 export default class Ship {
   constructor(role, name, initiative, hulls, computers, shields, ionCannons, plasmaCannons, antimatterCannons, missiles) {
+    this.id = Math.random();
     this.role = role;
     this.name = name;
     this.initiative = this.role === 'defender' ? initiative + 0.5 : initiative;
@@ -10,6 +11,23 @@ export default class Ship {
     this.plasmaCannons = plasmaCannons;
     this.antimatterCannons = antimatterCannons;
     this.missiles = missiles;
+    this.missileRounds = 0;
+    this.rounds = 0;
+    this.missileThreat = missiles * 2 * (computers + 1);
+    this.cannonThreat = ((ionCannons + ((plasmaCannons * 2) || 0) + ((antimatterCannons * 3) || 0)) * (computers + 1)) + hulls;
+    this.priority = this.name === 'Dreadnought' ? 1 : this.name === 'Cruiser' ? 2 : this.name === 'Starbase' ? 3 : this.name === 'Interceptor' ? 4 : 1;
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  getRounds() {
+    return this.rounds;
+  }
+
+  setRounds() {
+    this.rounds += 1;
   }
 
   getRole() {
@@ -22,6 +40,10 @@ export default class Ship {
 
   getHulls() {
     return this.hulls;
+  }
+
+  removeHulls(damage) {
+    this.hulls -= damage;
   }
 
   getComputers() {
@@ -63,9 +85,9 @@ export default class Ship {
     return Math.floor(Math.random() * 6) + 1;
   }
 
-  getMissileRolls(arm) {
+  getRolls(arm) {
     const throws = [];
-    const numOfRolls = arm === 1 ? this.getIonCannons() : arm === 2 ? this.getPlasmaCannons() : arm === 3 ? this.getAntimatterCannons() : this.getMissiles();
+    const numOfRolls = arm === 'ion' ? this.getIonCannons() : arm === 'plasma' ? this.getPlasmaCannons() : arm === 'antimatter' ? this.getAntimatterCannons() : arm === 'missile' ? this.getMissiles() : 0;
     for (let i = 0; i < numOfRolls; i++) {
       throws.push(this.rollDice());
     }
@@ -73,12 +95,12 @@ export default class Ship {
   }
 }
 
-const ship = new Ship('defender', 'Cruiser', 3, 2, 1, 0, 1, 1, 0, 3);
-console.log(ship)
-console.log(ship.getInitiative());
-console.log(ship.calculateCannonThreat());
-console.log(ship.calculateMissileThreat());
-console.log(ship.getMissileRolls(1));
-console.log(ship.getMissileRolls(2));
-console.log(ship.getMissileRolls(3));
-console.log(ship.getMissileRolls(4));
+// const ship = new Ship('defender', 'Cruiser', 3, 2, 1, 0, 1, 1, 0, 3);
+// console.log(ship)
+// console.log(ship.getInitiative());
+// console.log(ship.calculateCannonThreat());
+// console.log(ship.calculateMissileThreat());
+// console.log(ship.getMissileRolls(1));
+// console.log(ship.getMissileRolls(2));
+// console.log(ship.getMissileRolls(3));
+// console.log(ship.getMissileRolls(4));
