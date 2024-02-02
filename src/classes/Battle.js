@@ -26,7 +26,7 @@ export default class Battle {
   getCannonRoundShots() {
     const shooters = this.shooters;
     const shots = shooters.map((shooter) => shooter.fireCannons());
-    this.shots = shots.flat();
+    this.shots = shots.flat().sort((a, b) => a.damage - b.damage);
   }
 
   getTargets() {
@@ -47,11 +47,11 @@ export default class Battle {
     }
   }
 
-  assignDamageWhenEqualShieldValues() {
-    while (this.shots.length > 0 && this.targets.length > 0) {
-      if (this.targets.length > 1) { console.log('true');}
-    }
-  }
+  // assignDamageWhenEqualShieldValues() {
+  //   while (this.shots.length > 0 && this.targets.length > 0) {
+  //     if ()
+  //   }
+  // }
 
 
 
@@ -59,8 +59,8 @@ export default class Battle {
 
 }
 
-const ship1 = new Ship('attacker', 'Cruiser', 3, 2, 4, 3, 0, 0, 5, 3);
-const ship2 = new Ship('attacker', 'Dreadnought', 3, 1, 1, 3, 0, 5, 0, 2);
+const ship1 = new Ship('attacker', 'Cruiser', 3, 2, 4, 3, 0, 5, 0, 3);
+const ship2 = new Ship('attacker', 'Dreadnought', 3, 1, 1, 3, 0, 0, 5, 2);
 const ship3 = new Ship('defender', 'Cruiser', 3, 2, 2, 3, 5, 0, 0, 3);
 const ship4 = new Ship('defender', 'Dreadnought', 3, 1, 1, 3, 0, 0, 0, 2);
 const battle = new Battle([ship1, ship2, ship3, ship4]);
