@@ -4,7 +4,9 @@ export default class Battle {
   constructor(armies) {
     this.rounds = 0;
     this.armies = armies;
+    this.shooters = [];
     this.target = 'attacker';
+    this.shots = [];
   }
 
   getShipsWithLowestRoundsValue() {
@@ -17,19 +19,22 @@ export default class Battle {
     const highestInitiative = Math.max(...stillToFireArray.map((ship) => ship.initiative));
     const shooters = stillToFireArray.filter((ship) => ship.initiative === highestInitiative);
     this.target = shooters[0].role === 'attacker' ? 'defender' : 'attacker';
-    console.log(this.target);
-    return shooters;
+    this.shooters = shooters;
   }
 
   getCannonRoundShots() {
-    const shooters = this.getNextShooters();
+    const shooters = this.shooters;
     const shots = shooters.map((shooter) => shooter.fireCannons());
-    return shots.flat();
+    this.shots = shots.flat();
   }
 
   getTargets() {
-    return this.armies.filter((ship) => ship.role === this.target);
+    return this.armies.filter((ship) => ship.role === this.target).sort((a, b) => a.priority - b.priority);
   }
+
+
+
+
 
 
 }

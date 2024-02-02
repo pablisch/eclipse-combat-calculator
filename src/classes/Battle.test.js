@@ -1,6 +1,6 @@
 import Ship from './Ship';
 import Battle from './Battle';
-import { describe, expect, test, assert, isObject } from 'vitest';
+import { describe, expect, test, assert } from 'vitest';
 
 describe('Battle', () => {
   describe('getShipsWithLowestRoundsValue', () => {
@@ -43,8 +43,13 @@ describe('Battle', () => {
       const ship4 = new Ship('defender', 'Dreadnought', 3, 1, 2, 0, 2, 1, 0, 2);
       ship1.setRounds();
       const battle = new Battle([ship1, ship2, ship3, ship4]);
+
+      // ACT
+      battle.getNextShooters()
+      const shooters = battle.shooters;
+
       // Defender ships have an extra 0.5 added to their initiative
-      expect(battle.getNextShooters()).toEqual([ship3, ship4]);
+      expect(shooters).toEqual([ship3, ship4]);
     });
   });
 
@@ -60,7 +65,8 @@ describe('Battle', () => {
       // ACT
       ship3.setRounds();
       ship4.setRounds();
-      const shots = battle.getCannonRoundShots();
+      battle.getCannonRoundShots();
+      const shots = battle.shots;
       
       // ASSERT
       assert(Array.isArray(shots));
@@ -71,6 +77,41 @@ describe('Battle', () => {
           assert('damage' in shot);
           assert('six' in shot);
         });
+    });
+  });
+
+  describe('getTargets', () => {
+    test('getTargets returns an array of Ships that are being attacked in order of priority in a new Battle', () => {
+      // ARRANGE
+      const ship1 = new Ship('attacker', 'Cruiser', 3, 2, 1, 1, 1, 0, 0, 0);
+      const ship2 = new Ship('attacker', 'Dreadnought', 3, 1, 1, 0, 2, 0, 0, 0);
+      const ship3 = new Ship('defender', 'Cruiser', 3, 2, 1, 0, 1, 0, 0, 0);
+      const ship4 = new Ship('defender', 'Dreadnought', 3, 1, 0, 0, 2, 0, 0, 0);
+      const battle = new Battle([ship1, ship2, ship3, ship4]);
+
+      // ACT
+
+      // ASSERT
+      expect(battle.getTargets()).toEqual([ship2, ship1]);
+    });
+    
+    test('getTargets returns an array of Ships that are being attacked in order of priority after rounds (1)', () => {
+      // ARRANGE
+      const ship1 = new Ship('attacker', 'Cruiser', 3, 2, 1, 1, 1, 0, 0, 0);
+      const ship2 = new Ship('attacker', 'Dreadnought', 3, 1, 1, 0, 2, 0, 0, 0);
+      const ship3 = new Ship('defender', 'Cruiser', 3, 2, 1, 0, 1, 0, 0, 0);
+      const ship4 = new Ship('defender', 'Dreadnought', 3, 1, 0, 0, 2, 0, 0, 0);
+      const ship5 = new Ship('defender', 'Interceptor', 4, 1, 0, 0, 1, 0, 0, 0);
+      const ship6 = new Ship('attacker', 'Interceptor', 4, 1, 0, 0, 1, 0, 0, 0);
+      const battle = new Battle([ship1, ship2, ship3, ship4, ship5, ship6]);
+
+      // ACT
+      ship3.setRounds();
+      ship4.setRounds();
+      ship5.setRounds();
+      battle.getNextShooters();
+      // ASSERT
+      expect(battle.getTargets()).toEqual([ship4, ship3, ship5]);
     });
   });
 });
