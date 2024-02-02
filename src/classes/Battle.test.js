@@ -32,8 +32,13 @@ describe('Battle', () => {
       const ship3 = new Ship('defender', 'Cruiser', 3, 2, 2, 0, 3, 2, 1, 3);
       const ship4 = new Ship('defender', 'Dreadnought', 2, 1, 2, 0, 2, 1, 0, 2);
       const battle = new Battle([ship1, ship2, ship3, ship4]);
+
+      // ACT
+      battle.getNextShooters()
+      const shooters = battle.shooters;
+
       // Defender ships have an extra 0.5 added to their initiative
-      expect(battle.getNextShooters()).toEqual([ship3]);
+      expect(shooters).toEqual([ship3]);
     });
     
     test('should return an array of Ships with highest inititiative where it also has the lowest rounds value', () => {
@@ -91,11 +96,13 @@ describe('Battle', () => {
 
       // ACT
 
+      battle.getTargets();
+      const targets = battle.targets;
       // ASSERT
-      expect(battle.getTargets()).toEqual([ship2, ship1]);
+      expect(targets).toEqual([ship2, ship1]);
     });
     
-    test('getTargets returns an array of Ships that are being attacked in order of priority after rounds (1)', () => {
+    test('getTargets returns an array of Ships that are being attacked in order of priority after rounds', () => {
       // ARRANGE
       const ship1 = new Ship('attacker', 'Cruiser', 3, 2, 1, 1, 1, 0, 0, 0);
       const ship2 = new Ship('attacker', 'Dreadnought', 3, 1, 1, 0, 2, 0, 0, 0);
@@ -110,8 +117,10 @@ describe('Battle', () => {
       ship4.setRounds();
       ship5.setRounds();
       battle.getNextShooters();
+      battle.getTargets();
+      const targets = battle.targets;
       // ASSERT
-      expect(battle.getTargets()).toEqual([ship4, ship3, ship5]);
+      expect(targets).toEqual([ship4, ship3, ship5]);
     });
   });
 });
