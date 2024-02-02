@@ -53,7 +53,7 @@ function App() {
     armies = initiativeOrderSort(armies);
 
     const startingArmies = cloneDeep(armies);
-    // console.log('armies: ', armies)
+    console.log('armies: ', armies)
     // console.log('startingArmies: ', startingArmies)
     
 
