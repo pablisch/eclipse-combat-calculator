@@ -5,6 +5,7 @@ import PlayerSelectionBox from './components/PlayerSelectionBox';
 import CombatantBox from './components/CombatantBox';
 // eslint-disable-next-line no-unused-vars
 import Ship from './classes/Ship';
+import Battle from './classes/Battle';
 import {
   getArmies,
   initiativeOrderSort,
@@ -50,6 +51,20 @@ function App() {
 
     getArmies(attacker, 'attacker', armies);
     getArmies(defender, 'defender', armies);
+
+    const battle = new Battle(armies);
+    const thisBattle = cloneDeep(battle);
+
+    
+
+
+
+
+
+
+
+
+
     armies = initiativeOrderSort(armies);
 
     const startingArmies = cloneDeep(armies);
