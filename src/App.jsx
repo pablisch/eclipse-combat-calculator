@@ -30,8 +30,8 @@ function App() {
         startBattle();
       }, 100);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [battleCount])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [battleCount]);
 
   let armies = [];
   // let attacks = 0;
@@ -40,7 +40,7 @@ function App() {
 
   const handleBattle = () => {
     setBattleInProgress(true);
-    setBattleCount(count => count + 1);
+    setBattleCount((count) => count + 1);
   };
 
   const startBattle = () => {
@@ -53,11 +53,10 @@ function App() {
     armies = initiativeOrderSort(armies);
 
     const startingArmies = cloneDeep(armies);
-    console.log('armies: ', armies)
+    console.log('armies: ', armies);
     // console.log('startingArmies: ', startingArmies)
-    
 
-    let battles = {attacker: 0, defender: 0};
+    let battles = { attacker: 0, defender: 0 };
     for (let i = 0; i < runs; i++) {
       armies = cloneDeep(startingArmies);
       // console.log('armies: ', armies[0], armies[1]);
@@ -66,7 +65,7 @@ function App() {
         const shooter = getNextAttacker(armies);
         const shots = fireCannons(shooter);
         // console.log('shots: ', shots);
-        const targets = orderTargetsByPriority(armies, shooter.getRole());
+        const targets = orderTargetsByPriority(armies, shooter.role);
         // console.log(enemiesRemaining(armies));
         assignDamage(targets, shooter, shots, armies, allRolls);
         // attacks++;
@@ -80,14 +79,28 @@ function App() {
           }
         }
       }
-      
+
       armies = [];
       // attacks = 0;
       allRolls = [];
     }
-    console.log('attacker:', Math.round(battles.attacker / (runs / 100)), 'defender:', Math.round(battles.defender / (runs / 100)), 'over', runs, 'battles.');
+    console.log(
+      'attacker:',
+      Math.round(battles.attacker / (runs / 100)),
+      'defender:',
+      Math.round(battles.defender / (runs / 100)),
+      'over',
+      runs,
+      'battles.'
+    );
     setBattleInProgress(false);
-    setReport([`${allData[attackerIndex].player}`, ' has a', `${Math.round(battles.attacker / (runs / 100))}%`, ' chance of defeating the', `${allData[defenderIndex].player}`]);
+    setReport([
+      `${allData[attackerIndex].player}`,
+      ' has a',
+      `${Math.round(battles.attacker / (runs / 100))}%`,
+      ' chance of defeating the',
+      `${allData[defenderIndex].player}`,
+    ]);
   };
 
   return (
