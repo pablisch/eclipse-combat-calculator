@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-// import { playerShipData } from '../src/data/playerShipData.js';
+import { playerShipData } from '../src/data/playerShipData.js';
 import PlayerSelectionBox from './components/PlayerSelectionBox';
 import CombatantBox from './components/CombatantBox';
 // eslint-disable-next-line no-unused-vars
@@ -330,7 +330,7 @@ const baseData = [
   },
 ];
 
-const playerShipData = [
+const playerShipData2 = [
   ...baseData,
   { ...baseData[2], player: 'Hydran' },
   { ...baseData[2], player: 'Mechanema' },
