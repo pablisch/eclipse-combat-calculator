@@ -25,26 +25,20 @@
   font-size: 1.3rem;
   padding: 4px 10px;
   border-radius: 10px;
-  border: 2px solid #336dbe;
-  background-color: #a5c4ef;
-  border: 2px solid #276d02;
-  background-color: #a0f13d;
-  outline: 2px solid #f9ffd9;
-  box-shadow: 1px 2px 3px 3px rgba(66, 186, 250, 0.9);
+  border: 2px solid #a5c4ef;
+  background-color: #235497;
+  color: #fff;
+  outline: 1px solid #313131;
+  box-shadow: 0px 1px 3px 1px rgba(66, 186, 250, 0.9);
   width: 220px;
 }
 
 .player-selection-box button:hover {
-  border: 2px solid #a5c4ef;
-  background-color: #235497;
-  color: #fff;
+  border: 2px solid #276d02;
+  background-color: #a0f13d;
+  outline: 1px solid #f5f78d;
+  color: #000;
   cursor: pointer;
-}
-
-.calculating {
-  border: 2px solid #38f35a;
-  background-color: #be33ab;
-  color: #353324;
 }
 
 .player-selection-box button:disabled {
