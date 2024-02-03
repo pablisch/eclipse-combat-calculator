@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { playerShipData } from './data/playerShipData';
+import { playerShipData } from './data/playerData';
 import PlayerSelectionBox from './components/PlayerSelectionBox';
 import CombatantBox from './components/CombatantBox';
 // eslint-disable-next-line no-unused-vars
 import Ship from './classes/Ship';
 import Battle from './classes/Battle';
-import {getArmies} from '../src/util/battleFunctions';
+import { getArmies } from '../src/util/battleFunctions';
+
 
 function App() {
   const [allData, setAllData] = useState(playerShipData);
@@ -25,11 +26,6 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [battleCount]);
-
-  
-  // let attacks = 0;
-  // let allRolls = [];
-  // let runs = 100000;
 
   const handleBattle = () => {
     setBattleInProgress(true);
@@ -50,7 +46,7 @@ function App() {
   let battles = { attacker: 0, defender: 0 };
 
   for (let i = 0; i < runs; i++) {
-    const armies = cloneDeep(initialArmies); // Clone the initial armies for each battle
+    const armies = cloneDeep(initialArmies);
     const battle = new Battle(armies);
 
     if (battle.fight() === 'attacker') {
@@ -68,7 +64,6 @@ function App() {
     `${allData[attackerIndex].player} has a ${Math.round(battles.attacker / (runs / 100))}% chance of defeating the ${allData[defenderIndex].player}`,
   ]);
 };
-
 
   return (
     <div id='App'>
