@@ -1,12 +1,348 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { playerShipData } from '../src/data/playerShipData.js';
+// import { playerShipData } from '../src/data/playerShipData.js';
 import PlayerSelectionBox from './components/PlayerSelectionBox';
 import CombatantBox from './components/CombatantBox';
 // eslint-disable-next-line no-unused-vars
 import Ship from './classes/Ship';
 import Battle from './classes/Battle';
-import {getArmies} from '../src/util/battleFunctions';
+import { getArmies } from '../src/util/battleFunctions';
+
+const baseData = [
+  {
+    player: 'Ancients',
+    ships: [
+      {
+        name: 'Ancient Ship',
+        quantity: 1,
+        initiative: 2,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 0,
+        consumption: 0,
+      },
+    ],
+  },
+  {
+    // player: 'Galactic Centre Defence System',
+    player: 'GCDS',
+    ships: [
+      {
+        name: 'GCDS',
+        quantity: 1,
+        initiative: 0,
+        hulls: 8,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 4,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 0,
+        consumption: 0,
+      },
+    ],
+  },
+  {
+    player: 'Eridani',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 0,
+        initiative: 3,
+        hulls: 1,
+        computers: 0,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 0,
+        initiative: 2,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 1,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 4,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 4,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 1,
+      },
+    ],
+  },
+  {
+    player: 'Orion',
+    ships: [
+      {
+        name: 'Interceptor',
+        initiative: 4,
+        quantity: 0,
+        hulls: 1,
+        computers: 1,
+        shields: 1,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 4,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 1,
+        initiative: 3,
+        hulls: 2,
+        computers: 1,
+        shields: 1,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 2,
+        hulls: 3,
+        computers: 1,
+        shields: 1,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 6,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 5,
+        hulls: 3,
+        computers: 1,
+        shields: 1,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 1,
+      },
+    ],
+  },
+  {
+    player: 'Planta',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 0,
+        initiative: 1,
+        hulls: 1,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 0,
+        initiative: 1,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 1,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 2,
+        hulls: 3,
+        computers: 2,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 5,
+        consumption: 1,
+      },
+    ],
+  },
+  {
+    player: 'Draco',
+    ships: [
+      {
+        name: 'Interceptor',
+        quantity: 0,
+        initiative: 3,
+        hulls: 1,
+        computers: 0,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Cruiser',
+        quantity: 0,
+        initiative: 2,
+        hulls: 2,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 2,
+      },
+      {
+        name: 'Dreadnought',
+        quantity: 0,
+        initiative: 1,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 2,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 3,
+      },
+      {
+        name: 'Starbase',
+        quantity: 0,
+        initiative: 4,
+        hulls: 3,
+        computers: 1,
+        shields: 0,
+        missiles: 0,
+        cannons: {
+          ion: 1,
+          plasma: 0,
+          antimatter: 0,
+        },
+        power: 3,
+        consumption: 1,
+      },
+    ],
+  },
+];
+
+const playerShipData = [
+  ...baseData,
+  { ...baseData[2], player: 'Hydran' },
+  { ...baseData[2], player: 'Mechanema' },
+  { ...baseData[2], player: 'Terran' },
+  { ...baseData[2], player: 'Terran Alliance' },
+  { ...baseData[2], player: 'Terran Directorate' },
+  { ...baseData[2], player: 'Terran federation' },
+  { ...baseData[2], player: 'Terran Republic' },
+  { ...baseData[2], player: 'Terran Union' },
+
+];
+
 
 function App() {
   const [allData, setAllData] = useState(playerShipData);
