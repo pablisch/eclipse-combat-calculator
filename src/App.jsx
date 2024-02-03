@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { playerShipData } from '../src/data/data';
+import { playerShipData } from './data/playerData';
 import PlayerSelectionBox from './components/PlayerSelectionBox';
 import CombatantBox from './components/CombatantBox';
 // eslint-disable-next-line no-unused-vars
