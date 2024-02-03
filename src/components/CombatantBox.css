@@ -6,6 +6,7 @@
   border: 3px solid #336dbe;
   border-radius: 25px;
   padding: 15px 30px 25px;
+  position: relative;
 }
 
 .ship-box {
@@ -35,3 +36,37 @@
   font-weight: 200;
   margin-right: 10px;
 }
+
+.generator-link {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid #336dbe;
+  border-radius: 25px;
+  background-color: #09111a;
+  margin-left: 10px;
+}
+
+.link:hover {
+  background-color: #a0f13d;
+  border: 1px solid #fff;
+}
+
+.link a {
+  color: #81b7e2;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.link:hover a {
+  color: #09111a;
+}
+

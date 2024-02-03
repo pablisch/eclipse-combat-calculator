@@ -47,7 +47,7 @@ const baseData = [
     ships: [
       {
         name: 'Interceptor',
-        quantity: 1,
+        quantity: 0,
         initiative: 3,
         hulls: 1,
         computers: 0,
@@ -185,7 +185,7 @@ const baseData = [
     ships: [
       {
         name: 'Interceptor',
-        quantity: 1,
+        quantity: 0,
         initiative: 1,
         hulls: 1,
         computers: 1,
@@ -254,7 +254,7 @@ const baseData = [
     ships: [
       {
         name: 'Interceptor',
-        quantity: 1,
+        quantity: 0,
         initiative: 3,
         hulls: 1,
         computers: 0,
