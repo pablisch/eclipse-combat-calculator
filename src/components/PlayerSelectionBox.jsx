@@ -3,13 +3,14 @@ import { attackers, defenders } from '../data/combatants';
 import './PlayerSelectionBox.css';
 
 const PlayerSelectionBox = ({
+  allData,
   attackerIndex,
   defenderIndex,
   setAttackerIndex,
   setDefenderIndex,
   handleBattle,
   battleInProgress,
-  report,
+  percentage,
 }) => {
   
   const handleSelectAttacker = (e) => {
@@ -23,7 +24,14 @@ const PlayerSelectionBox = ({
     // console.log('defenderIndex: ', defenderIndex)
   };
 
-  // console.log('attacker:', attacker.player, ', and defender:', defender.player);
+  // eslint-disable-next-line react/prop-types
+  const attacker = allData[attackerIndex].player;
+  // eslint-disable-next-line react/prop-types
+  const defender = allData[defenderIndex].player;
+  const report = percentage === null ? 'Choose your battle!' :
+    percentage === 0 ? <><span>{attacker}</span> have pretty much <span>no chance</span> of winning against <span>{defender}</span></> :
+    percentage === 100 ? (<><span>{attacker}</span> will <span>crush</span> the <span>{defender}</span>... unless they don't!</>) :
+    (<><span>{attacker}</span> has a <span>{percentage}%</span> chance of defeating the <span>{defender}</span></>);
 
   return (
     <div className='player-selection-box'>
@@ -44,9 +52,7 @@ const PlayerSelectionBox = ({
       <div className="button-and-report">
 
         <button onClick={handleBattle} disabled={battleInProgress} className={battleInProgress ? 'calculating' : ''}>{battleInProgress ? 'Calculating...' : 'Commence battle'}</button>
-        {report.length === 1 ? <p id='report'>{report[0]}</p> : <p id='report'>
-          <span>{ report[0]}</span>{report[1] } <span>{report[2] }</span>{report[3] } <span>{ report[4]}</span>
-        </p>}
+        <p id='report'>{report}</p>
       </div>
 
       <div id='defender-selector-box' className='combatant-select-box'>
@@ -73,7 +79,7 @@ PlayerSelectionBox.propTypes = {
   setDefenderIndex: PropTypes.func.isRequired,
   handleBattle: PropTypes.func.isRequired,
   battleInProgress: PropTypes.bool.isRequired,
-  report: PropTypes.array.isRequired,
+  percentage: PropTypes.number,
 };
 
 export default PlayerSelectionBox;

@@ -13,7 +13,8 @@ function App() {
   const [allData, setAllData] = useState(playerShipData);
   const [battleInProgress, setBattleInProgress] = useState(false);
   const [battleCount, setBattleCount] = useState(false);
-  const [report, setReport] = useState(['Choose your battle!']);
+  // const [report, setReport] = useState(['Choose your battle!']);
+  const [percentage, setPercentage] = useState(null);
 
   const [attackerIndex, setAttackerIndex] = useState(3);
   const [defenderIndex, setDefenderIndex] = useState(0);
@@ -56,13 +57,13 @@ function App() {
     }
   }
 
-  console.log('Attacker:', Math.round(battles.attacker / (runs / 100)), 'vs. Defender:', Math.round(battles.defender / (runs / 100)));
+    console.log('Attacker:', Math.round(battles.attacker / (runs / 100)), 'vs. Defender:', Math.round(battles.defender / (runs / 100)));
+    console.log('Attacker wins', battles.attacker, 'times.', (Math.round(battles.attacker / (runs / 10000))) / (runs / 1000), '%');
+    console.log('Defender wins', battles.defender, 'times.', (Math.round(battles.defender / (runs / 10000))) / (runs / 1000), '%');
 
   setBattleInProgress(false);
 
-  setReport([
-    `${allData[attackerIndex].player} has a ${Math.round(battles.attacker / (runs / 100))}% chance of defeating the ${allData[defenderIndex].player}`,
-  ]);
+  setPercentage(Math.round(battles.attacker / (runs / 100)));
 };
 
   return (
@@ -84,7 +85,7 @@ function App() {
           setDefenderIndex={setDefenderIndex}
           handleBattle={handleBattle}
           battleInProgress={battleInProgress}
-          report={report}
+          percentage={percentage}
         />
       </div>
       <div id='defender'>
